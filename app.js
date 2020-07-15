@@ -74,5 +74,5 @@ fetch(api1)
         console.log(data);
             let locationTimezone = document.querySelector(".location-timezone");
             //Setting DOM Elements from API
-            locationTimezone.textContent = data.time_zone.name;
+            locationTimezone.textContent = data.district + ' / ' + data.state_prov;
 });
