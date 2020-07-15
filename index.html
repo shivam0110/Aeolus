@@ -1,30 +1,27 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Aeolus - Weather App</title>
+		<title>Wether</title>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />       
-		<meta name="description" content="Aeolus is a web browser weather app, it uses location to find weather of your curent city/state using the darksky api which is for apple" />
-		<meta name="keywords" content="Aeolus , Weather app , skycons , browser app, using locaation" />
+		<meta name="description" content="Aeolus Weather app" />
+		<meta name="keywords" content="Aeolus weather app openweathermap" />
 		<link rel="stylesheet" href="./style.css" />
-		<link rel ="icon" type="image/png" href="./icon.gif" >
+		<link rel ="icon" type="image/png" href="icon.gif" >
 	</head>
 	<body>
-        <div class="location">
-            <h1 class="location-timezone">Timezone</h1>
-            <canvas class="icon" width="128" height="128"></canvas>
-        </div>
-        
-        <div class="temperature">
-            <div class="degree-section">
-                <h2 class="temperature-dergee">96</h2>
-                <span>F</span>
+            <div class="location">
+                <h1 class="location-timezone">Timezone</h1>
+                <img id="icon" width="128" height="128" src="http://openweathermap.org/img/wn/02d@2x.png">
             </div>
-            <div class="temperature-description">Its frigging hot</div>
-        </div>
-
-        <script src="skycons.js"></script>
-        <script src="app.js"></script>
+            <div class="temperature">
+                <div class="degree-section">
+                    <h2 class="temperature-dergee">96</h2>
+                    <span>F  /C</span>
+                </div>
+                <div class="temperature-description">Its frigging hot</div>
+            </div>
+        <script src="app.js"></script>            
     </body>
 </html>
