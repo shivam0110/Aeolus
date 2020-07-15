@@ -64,7 +64,7 @@ window.addEventListener('load', ()=>{
 
 console.log('line 65');
 const proxy1 = "https://cors-anywhere.herokuapp.com/";
-const api1 = `http://api.ipstack.com/check?access_key=1ec141af0bc98a6069282580ef9df2f6`;
+const api1 = `https://api.ipgeolocation.io/ipgeo?apiKey=b104e1db249f48aeba843d10ad66469b`;
 
 fetch(api1)
     .then(response =>{
@@ -74,5 +74,5 @@ fetch(api1)
         console.log(data);
             let locationTimezone = document.querySelector(".location-timezone");
             //Setting DOM Elements from API
-            locationTimezone.textContent = data.city + ', '+ data.region_name;
+            locationTimezone.textContent = data.time_zone.name;
 });
