@@ -28,9 +28,7 @@ window.addEventListener('load', ()=>{
                 locationTimezone.textContent = data.city + ' / ' + data.region;
                 long = data.longitude;
                 lat = data.latitude;
-    });
-
-
+                
     
             //long = position.coords.longitude;
             //lat = position.coords.latitude;
@@ -74,4 +72,7 @@ window.addEventListener('load', ()=>{
 
 
                 });
+    });
+
+
 });
