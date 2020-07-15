@@ -1,20 +1,27 @@
+var iconimg = document.getElementById('icon');
+
+//iconimg.src = 'http://openweathermap.org/img/wn/10d@2x.png';
+
+
 window.addEventListener('load', ()=>{
     let long;
     let lat;
     let temperatureDescription = document.querySelector(".temperature-description");
     let temperatureDegree = document.querySelector(".temperature-dergee");
-    let locationTimezone = document.querySelector(".location-timezone");
+    //let locationTimezone = document.querySelector(".location-timezone");
     let temperatureSection = document.querySelector(".temperature")
-    const temperatureSpan = document.querySelector(".temperature span")
+    const temperatureSpan = document.querySelector(".temperature span");
 
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position =>{
             long = position.coords.longitude;
             lat = position.coords.latitude;
-
+            //e04cf9b52062859663ef8908c137c365
+	    //Weatherstack: 3c4e009a79904c54af52db127e8e7b87
+            
             const proxy = "https://cors-anywhere.herokuapp.com/";
-            const api = `${proxy}https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${lat},${long}`;
+            const api = `${proxy}api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=e04cf9b52062859663ef8908c137c365`;
 
             fetch(api)
                 .then(response =>{
@@ -22,27 +29,29 @@ window.addEventListener('load', ()=>{
                 })
                 .then(data=>{
                     console.log(data);
-                    const {temperature, summary, icon} = data.currently;
+                    const feels_like = data.main.feels_like;
+                    const summary = data.weather[0].description;
+                    const icon = data.weather[0].icon;
 
                     //Setting DOM Elements from API
-                    temperatureDegree.textContent = temperature; 
+                    temperatureDegree.textContent = Math.floor(((feels_like-273.15)*(9/5)+32)); 
                     temperatureDescription.textContent = summary; 
-                    locationTimezone.textContent = data.timezone;
+                    //locationTimezone.textContent = data.name;
                     
-                    //formula for celsius
-                    let celsius = (temperature - 32) * (5 / 9);
-                    
-                    //set icons
-                    setIcons(icon, document.querySelector(".icon"));
+                    //icon
+                    iconimg.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 
+                    //formula for celsius
+                    let celsius = (feels_like - 273.15);
+                    
                     //Temperature conversion
                     temperatureSection.addEventListener("click", ()=>{
-                        if(temperatureSpan.textContent === "F"){
-                            temperatureSpan.textContent = "C";
-                            temperatureDegree.textContent = Math.round(celsius);
+                        if(temperatureSpan.textContent === "F  /C"){
+                            temperatureSpan.textContent = "C  /F";
+                            temperatureDegree.textContent = Math.floor(celsius);
                         }else{
-                            temperatureSpan.textContent = "F";
-                            temperatureDegree.textContent = temperature;
+                            temperatureSpan.textContent = "F  /C";
+                            temperatureDegree.textContent = Math.floor(((feels_like-273.15)*(9/5)+32));
                         }
                     });
 
@@ -51,12 +60,19 @@ window.addEventListener('load', ()=>{
         });
     }
 
-    function setIcons(icon, iconId){
-        const skycons = new Skycons({color: " white"});
-        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-        skycons.play();
-        return skycons.set(iconId, Skycons[currentIcon]);
-    }
+});
 
+console.log('line 65');
+const proxy1 = "https://cors-anywhere.herokuapp.com/";
+const api1 = `http://api.ipstack.com/check?access_key=1ec141af0bc98a6069282580ef9df2f6`;
 
+fetch(api1)
+    .then(response =>{
+        return response.json();
+    })
+    .then(data=>{
+        console.log(data);
+            let locationTimezone = document.querySelector(".location-timezone");
+            //Setting DOM Elements from API
+            locationTimezone.textContent = data.city + ', '+ data.region_name;
 });
